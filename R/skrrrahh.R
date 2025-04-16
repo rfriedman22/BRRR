@@ -18,7 +18,7 @@
 #'  supported.
 #'@param expr An optional expression to be executed before the sound.
 #'
-#'@return NULL 
+#'@return The result of \code{expr}
 #'
 #' @examples 
 #' # Play Gucci saying "BRRR"
@@ -46,7 +46,7 @@
 #' }
 #'@export
 skrrrahh <- function(sound=27, expr = NULL) {
-  expr
+  result <- expr
   sounds <- skrrrahh_sounds()
   sound_path <- NULL
   if(is.na(sounds[sound]) || length(sounds[sound]) != 1) {
@@ -78,6 +78,7 @@ skrrrahh <- function(sound=27, expr = NULL) {
   tryCatch(play_file(sound_path), error = function(ex) {
     warning("BRRR() could not play the sound due to the following error:\n", ex)
   })
+  return(result)
 }
 
 skrrrahh_sounds <- function() {
